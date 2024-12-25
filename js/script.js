@@ -7,7 +7,7 @@ const startButton = document.getElementById('start-button');
 const stopButton = document.getElementById('stop-button');
 const resetButton = document.getElementById('reset-button');
 
-let isTimerMode = false;
+let isTimerMode = false; // cronometro = false | temporizador = true
 
 modeTitle.textContent = isTimerMode ? 'Temporizador' : 'Cronômetro';
 toggleModeButton.textContent = isTimerMode ? 'Alternar para Cronômetro' : 'Alternar para Temporizador';
@@ -53,17 +53,6 @@ function formatInput() {
     }
 }
 
-function getNumericValue() {
-    let value = initialTimeInput.value.replace(',', '.');
-    let number = parseFloat(value);
-
-    if (isNaN(number)) {
-        return 0;
-    }
-
-    return number;
-}
-
 initialTimeInput.addEventListener('input', () => {
     clearTimeout(debounceTimeout);
 
@@ -72,31 +61,95 @@ initialTimeInput.addEventListener('input', () => {
     }, 500);
 });
 
+let timer;
+let stoper;
+let numericValue = 0;
+let number = 0;
+let isRunning = false;
 
+function formatTime(seconds) {
+    let hours = Math.floor(seconds / 3600);
+    let minutes = Math.floor((seconds % 3600) / 60);
+    let secs = seconds % 60;
+    
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
 
+function stopTimer() {
+    clearInterval(stoper);
+    stoper = null;
+    // const sound = new Audio('alarm.mp3');
+    // sound.play();
+    alert("time's up playng song...");
+}
 
-
-
+function updateTimerDisplay(value) {
+    let formattedTime = formatTime(value);
+    document.querySelector(".timer").innerHTML = formattedTime;
+}
 
 startButton.addEventListener('click', () => {
-    if (isTimerMode) {
-        let numericValue = getNumericValue();
-        console.log("true", numericValue);
-    } else {
-        let numericValue = getNumericValue();
-        console.log("false", numericValue);
+    if (isRunning) return;
+
+    isRunning = true;
+    
+    if (!isTimerMode) { // Cronômetro
+        timer = setInterval(() => {
+            number++;
+            updateTimerDisplay(number);
+        }, 1000);
+    } else { // Temporizador
+        numericValue = getNumericValue();
+        stoper = setInterval(() => {
+            if (numericValue <= 0) {
+                stopTimer();
+                reset();
+            } else {
+                numericValue--;
+                updateTimerDisplay(numericValue);
+            }
+        }, 1000);
     }
 });
 
+function getNumericValue() {
+    let value = initialTimeInput.value.replace(',', '.');
+    let number = parseFloat(value);
 
+    let minutes = Math.floor(number); 
+    let seconds = Math.round((number - minutes) * 100);
 
+    if (seconds >= 60) {
+        errorMessage.style.display = 'block';
+        errorMessage.textContent = 'Segundos > 59 inválidos';
+        startButton.disabled = true;
+        stopButton.disabled = true;
+        resetButton.disabled = true;
+        return 0;
+    } else {
+        errorMessage.style.display = 'none';
+        startButton.disabled = false;
+        stopButton.disabled = false;
+        resetButton.disabled = false;
+    }
 
+    return minutes * 60 + seconds;
+}
 
+stopButton.addEventListener('click', () => {
+    clearInterval(timer);
+    clearInterval(stoper);
+    isRunning = false;
+});
 
-
-
-
-
+resetButton.addEventListener('click', () => {
+    clearInterval(timer);
+    clearInterval(stoper);
+    isRunning = false;
+    number = 0;
+    numericValue = 0;
+    updateTimerDisplay(0);
+});
 
 function generateKeyframes() {
     const nColors = 150;
