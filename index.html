@@ -9,8 +9,20 @@
 </head>
 
 <body class="background">
-    
+    <div class="container">
+        <h2 id="mode-title">Cronômetro</h2>
+        <div class="number-display" id="number-display">00:00:00</div>
+        <div class="buttons">
+            <button id="start-button">Start</button>
+            <button id="stop-button">Stop</button>
+            <button id="reset-button">Reset</button>
+        </div>
+        <div class="toggle-section">
+            <button id="toggle-mode">Alternar para Temporizador</button>
+            <input type="text" id="initial-time" placeholder="Tempo inicial (min,seg)" style="display: none;">
+            <div class="error-message" id="error-message" style="display: none;">Entrada inválida</div>
+        </div>
+    </div>
 </body>
 <script src="./js/script.js"></script>
-
 </html>
