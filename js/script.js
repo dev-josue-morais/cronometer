@@ -75,13 +75,7 @@ function formatTime(seconds) {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
 
-function stopTimer() {
-    clearInterval(stoper);
-    stoper = null;
-    // const sound = new Audio('alarm.mp3');
-    // sound.play();
-    alert("time's up playng song...");
-}
+
 
 function updateTimerDisplay(value) {
     let formattedTime = formatTime(value);
@@ -111,6 +105,18 @@ startButton.addEventListener('click', () => {
         }, 1000);
     }
 });
+
+function stopTimer() {
+    clearInterval(stoper);
+    stoper = null;
+    isRunning = false;
+    number = 0;
+    numericValue = 0;
+    updateTimerDisplay(0);
+    // const sound = new Audio('alarm.mp3');
+    // sound.play();
+    alert("time's up playng song...");
+}
 
 function getNumericValue() {
     let value = initialTimeInput.value.replace(',', '.');
