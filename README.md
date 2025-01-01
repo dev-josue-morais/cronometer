@@ -15,7 +15,7 @@ Este é um projeto simples de Cronômetro e Temporizador criado com HTML, CSS e 
 
 Acesse a página de demonstração clicando no link abaixo:
 
-[Demonstração do Cronômetro e Temporizador](https://josue28jrd.github.io/cronometer/)
+[Demonstração do Cronômetro e Temporizador](https://dev-josue-morais.github.io/cronometer/)
 
 ## Tecnologias Utilizadas
 
@@ -45,4 +45,4 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou env
 **Josué Júnior**  
 Desenvolvedor Front-End com foco em criar interfaces intuitivas e funcionais.
 
-[Meu LinkedIn](https://www.linkedin.com/in/josuemorais/)
+[Meu LinkedIn](https://www.linkedin.com/in/dev-josue-morais/)
