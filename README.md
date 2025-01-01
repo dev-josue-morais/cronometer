@@ -45,4 +45,4 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou env
 **Josué Júnior**  
 Desenvolvedor Front-End com foco em criar interfaces intuitivas e funcionais.
 
-[Meu LinkedIn](https://www.linkedin.com/in/josue28jrd/)
+[Meu LinkedIn](https://www.linkedin.com/in/josuemorais/)
